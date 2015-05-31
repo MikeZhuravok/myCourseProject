@@ -24,7 +24,7 @@ namespace JobCentre.Views
             if (selectedIndex == -1)
                 return;
             this.employerTableAdapter.Fill(this.laborExchangeDataSet.Employer);
-            HeaderLabel.Text = "Edit: Employee";
+            HeaderLabel.Text = "Edit: Employer";
             addOrEditButton.Text = "Edit";
 
             this.employerTableAdapter.FillBy(this.laborExchangeDataSet.Employer, selectedIndex);
@@ -34,18 +34,21 @@ namespace JobCentre.Views
         {
             decimal indTaxNumber;
             if (full_nameTextBox.Text != "" && pasport_numberTextBox.Text != "" && phone_numberTextBox.Text != "" && bank_detailsTextBox.Text != ""
-                && decimal.TryParse(individual_tax_numberTextBox.Text, out indTaxNumber) && main_property_typeTextBox.Text != "" && economical_activityTextBox.Text != "")
+                && decimal.TryParse(individual_tax_numberTextBox.Text, out indTaxNumber) && mainPropertyTypeComboBox.Text != "" && economicalActivityComboBox.Text != "")
             {
                 if (selectedIndex == -1)
                 {
                     employerTableAdapter.InsertEmployerQuery(full_nameTextBox.Text, pasport_numberTextBox.Text, phone_numberTextBox.Text, bank_detailsTextBox.Text,
-                        indTaxNumber, main_property_typeTextBox.Text, economical_activityTextBox.Text);
+                        indTaxNumber, mainPropertyTypeComboBox.Text, economicalActivityComboBox.Text);
+                   
                 }
                 else
                 {
                     employerTableAdapter.UpdateEmployerQuery(full_nameTextBox.Text, pasport_numberTextBox.Text, phone_numberTextBox.Text, bank_detailsTextBox.Text,
-                                           indTaxNumber, main_property_typeTextBox.Text, economical_activityTextBox.Text, selectedIndex);
+                                           indTaxNumber, mainPropertyTypeComboBox.Text, economicalActivityComboBox.Text, selectedIndex);
                 }
+                this.employerTableAdapter.Update(this.laborExchangeDataSet);
+                DialogResult = DialogResult.OK;
             }
         }
     }

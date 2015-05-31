@@ -22,10 +22,6 @@ namespace JobCentre.Views
         private void FilterButton_Click(object sender, EventArgs e)
         {
             int from, to;
-            //if (hasVacanciesCheckBox.Checked)
-            //{
-            //    dbform.sqlString = "SELECT * FROM [Employee], [Vacancy] WHERE [Employee].[Employee's ID] = [Vacancy].[Employee's ID] ";
-            //}
             if (needsCheckBox.Checked)
             {
                 dbform.sqlString = "SELECT * FROM [Employee] WHERE Needs IS NOT NULL";

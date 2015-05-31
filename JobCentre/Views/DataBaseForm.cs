@@ -1,4 +1,5 @@
 ﻿using JobCentre.LaborExchangeDataSetTableAdapters;
+using JobCentre.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace JobCentre.Views
     public partial class DataBaseForm : Form
     {
         string primaryKey;
-        string connectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\App_Data\LaborExchange.mdf;Integrated Security=True;Connect Timeout=30";
+        string connectionString = Helper.connectionString;
         public string temp; // change in future
 
         public string sqlString = "";
@@ -40,7 +41,7 @@ namespace JobCentre.Views
             this.employeeTableAdapter.Fill(this.laborExchangeDataSet.Employee);
         }
 
-        int selectedIndex
+        int selectedIndex // return first element of table
         {
             get
             {
@@ -55,8 +56,30 @@ namespace JobCentre.Views
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            AddEmployee ae = new AddEmployee(selectedIndex);
-            ae.ShowDialog();
+            if (MainDataGridView.CurrentRow == null)
+            {
+                MessageBox.Show("Choose some");
+                return;
+            }
+            switch (tableName) // селектед айди неверный
+            {
+                case "Employer":
+                    AddEmployer ar = new AddEmployer(selectedIndex);
+                    ar.ShowDialog();
+                    break;
+                case "Employee":
+                    AddEmployee ae = new AddEmployee(selectedIndex);
+                    ae.ShowDialog();
+                    break;
+                case "Vacancy request":
+                    AddVacancyRequest avr = new AddVacancyRequest();
+                    break;
+                case "Vacancy":
+                    AddVacancy av = new AddVacancy(selectedIndex);
+                    av.ShowDialog();
+                    break;
+            }
+
 
             this.employeeTableAdapter.Fill(this.laborExchangeDataSet.Employee);
             MainDataGridView.DataSource = employeeTableAdapter.GetData();
@@ -105,32 +128,14 @@ namespace JobCentre.Views
                     }
                 return;
             }
-            //string attributeName = FindListComboBox.SelectedItem.ToString();
             string searchText = SearchTextBox.Text;
-            //using (SqlConnection sql = new SqlConnection(connectionString))
-            //{
-            //    string sqlCopy = (string)sqlString.Clone();
-            //    string rightPart = String.Format("[{0}] LIKE '%{1}%'", attributeName, searchText);
-            //    if (sqlString == "")
-            //    {
-            //        sqlCopy = String.Format("SELECT * FROM [dbo].[{0}] WHERE ", tableName) + rightPart;
-            //    }
-            //    else
-            //    {
-            //        sqlCopy += " AND " + rightPart;
-            //    }
-            //    SqlDataAdapter adapter = new SqlDataAdapter(sqlCopy, sql);
-            //    DataTable dt = new DataTable();
-            //    adapter.Fill(dt);
-            //    MainDataGridView.DataSource = dt;
-            //}
-            for (int i = 0; i < MainDataGridView.Rows.Count - 1; i++) // последняя строка пустая для добавления
+            for (int i = 0; i < MainDataGridView.Rows.Count - 1; i++)
                 for (int j = 0; j < MainDataGridView.Columns.Count; j++)
                 {
-                        MainDataGridView.Rows[i].Cells[j].Selected = false;
+                    MainDataGridView.Rows[i].Cells[j].Selected = false;
                 }
-            for (int i = 0; i < MainDataGridView.Rows.Count - 1; i++) // последняя строка пустая для добавления
-                for (int j = 0; j < MainDataGridView.Columns.Count; j++ )
+            for (int i = 0; i < MainDataGridView.Rows.Count - 1; i++)
+                for (int j = 0; j < MainDataGridView.Columns.Count; j++)
                 {
                     if (MainDataGridView.Rows[i].Cells[j].Value.ToString().ToLower().Contains(searchText.ToLower()))
                         MainDataGridView.Rows[i].Cells[j].Selected = true;
@@ -139,7 +144,7 @@ namespace JobCentre.Views
 
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            switch (tableName) // селектед айди неверный
+            switch (tableName)
             {
                 case "Employer":
                     EmployerFilterForm form = new EmployerFilterForm(this);
@@ -148,22 +153,13 @@ namespace JobCentre.Views
                         return;
                     using (SqlConnection sql = new SqlConnection(connectionString))
                     {
-                        //string sqlCopy = (string)sqlString.Clone();
-                        //if (sqlString == "")
-                        //{
-                        //    sqlCopy = String.Format("SELECT * FROM [dbo].[{0}] WHERE ", tableName) + temp;
-                        //}
-                        //else
-                        //{
-                        //    sqlCopy += " AND " + temp;
-                        //}
                         SqlDataAdapter adapter = new SqlDataAdapter(sqlString, sql);
                         DataTable dt = new DataTable();
-                        adapter.Fill(dt); // если закрыть окно КРИД
+                        adapter.Fill(dt);
                         MainDataGridView.DataSource = dt;
                     }
                     break;
-                case "Employee": // Сложно сделать эту сущность + поиск. Потом доделаю
+                case "Employee":
                     EmployeeFilterForm eff = new EmployeeFilterForm(this);
                     eff.ShowDialog();
                     if (eff.DialogResult != DialogResult.OK)

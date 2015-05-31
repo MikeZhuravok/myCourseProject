@@ -13,7 +13,7 @@ namespace JobCentre.Views
 {
     public partial class Sql_query_editor : Form
     {
-        string connectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\App_Data\LaborExchange.mdf;Integrated Security=True;Connect Timeout=30";
+        string connectionString = JobCentre.Models.Helper.connectionString;
         public Sql_query_editor()
         {
             InitializeComponent();

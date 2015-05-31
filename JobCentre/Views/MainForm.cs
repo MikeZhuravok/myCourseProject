@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JobCentre.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +16,7 @@ namespace JobCentre.Views
 {
     public partial class MainForm : Form
     {
-        string connectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\App_Data\LaborExchange.mdf;Integrated Security=True;Connect Timeout=30";
+        string connectionString = Helper.connectionString;
 
         public MainForm()
         {

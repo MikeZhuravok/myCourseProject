@@ -42,7 +42,8 @@
             System.Windows.Forms.Label work_natureLabel;
             System.Windows.Forms.Label phone_numberLabel;
             this.full_nameTextBox = new System.Windows.Forms.TextBox();
-            this.professionTextBox = new System.Windows.Forms.TextBox();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.laborExchangeDataSet = new JobCentre.LaborExchangeDataSet();
             this.record_of_serviceTextBox = new System.Windows.Forms.TextBox();
             this.pasport_numberTextBox = new System.Windows.Forms.TextBox();
             this.special_skillsTextBox = new System.Windows.Forms.TextBox();
@@ -50,15 +51,14 @@
             this.identification_codeTextBox = new System.Windows.Forms.TextBox();
             this.educationTextBox = new System.Windows.Forms.TextBox();
             this.needsTextBox = new System.Windows.Forms.TextBox();
-            this.work_modeTextBox = new System.Windows.Forms.TextBox();
-            this.work_natureTextBox = new System.Windows.Forms.TextBox();
             this.phone_numberTextBox = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
-            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.laborExchangeDataSet = new JobCentre.LaborExchangeDataSet();
             this.employeeTableAdapter = new JobCentre.LaborExchangeDataSetTableAdapters.EmployeeTableAdapter();
             this.tableAdapterManager = new JobCentre.LaborExchangeDataSetTableAdapters.TableAdapterManager();
             this.HeaderLabel = new System.Windows.Forms.Label();
+            this.professionsComboBox = new System.Windows.Forms.ComboBox();
+            this.workModeComboBox = new System.Windows.Forms.ComboBox();
+            this.workNatureComboBox = new System.Windows.Forms.ComboBox();
             full_nameLabel = new System.Windows.Forms.Label();
             professionLabel = new System.Windows.Forms.Label();
             record_of_serviceLabel = new System.Windows.Forms.Label();
@@ -191,13 +191,15 @@
             this.full_nameTextBox.Size = new System.Drawing.Size(100, 20);
             this.full_nameTextBox.TabIndex = 4;
             // 
-            // professionTextBox
+            // employeeBindingSource
             // 
-            this.professionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.employeeBindingSource, "Profession", true));
-            this.professionTextBox.Location = new System.Drawing.Point(119, 61);
-            this.professionTextBox.Name = "professionTextBox";
-            this.professionTextBox.Size = new System.Drawing.Size(100, 20);
-            this.professionTextBox.TabIndex = 6;
+            this.employeeBindingSource.DataMember = "Employee";
+            this.employeeBindingSource.DataSource = this.laborExchangeDataSet;
+            // 
+            // laborExchangeDataSet
+            // 
+            this.laborExchangeDataSet.DataSetName = "LaborExchangeDataSet";
+            this.laborExchangeDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // record_of_serviceTextBox
             // 
@@ -255,22 +257,6 @@
             this.needsTextBox.Size = new System.Drawing.Size(100, 20);
             this.needsTextBox.TabIndex = 20;
             // 
-            // work_modeTextBox
-            // 
-            this.work_modeTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.employeeBindingSource, "Work mode", true));
-            this.work_modeTextBox.Location = new System.Drawing.Point(119, 269);
-            this.work_modeTextBox.Name = "work_modeTextBox";
-            this.work_modeTextBox.Size = new System.Drawing.Size(100, 20);
-            this.work_modeTextBox.TabIndex = 22;
-            // 
-            // work_natureTextBox
-            // 
-            this.work_natureTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.employeeBindingSource, "Work nature", true));
-            this.work_natureTextBox.Location = new System.Drawing.Point(119, 295);
-            this.work_natureTextBox.Name = "work_natureTextBox";
-            this.work_natureTextBox.Size = new System.Drawing.Size(100, 20);
-            this.work_natureTextBox.TabIndex = 24;
-            // 
             // phone_numberTextBox
             // 
             this.phone_numberTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.employeeBindingSource, "Phone number", true));
@@ -288,16 +274,6 @@
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
-            // 
-            // employeeBindingSource
-            // 
-            this.employeeBindingSource.DataMember = "Employee";
-            this.employeeBindingSource.DataSource = this.laborExchangeDataSet;
-            // 
-            // laborExchangeDataSet
-            // 
-            this.laborExchangeDataSet.DataSetName = "LaborExchangeDataSet";
-            this.laborExchangeDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // employeeTableAdapter
             // 
@@ -321,17 +297,43 @@
             this.HeaderLabel.TabIndex = 27;
             this.HeaderLabel.Text = "Add: Employee";
             // 
+            // professionsComboBox
+            // 
+            this.professionsComboBox.FormattingEnabled = true;
+            this.professionsComboBox.Location = new System.Drawing.Point(119, 60);
+            this.professionsComboBox.Name = "professionsComboBox";
+            this.professionsComboBox.Size = new System.Drawing.Size(100, 21);
+            this.professionsComboBox.TabIndex = 29;
+            // 
+            // workModeComboBox
+            // 
+            this.workModeComboBox.FormattingEnabled = true;
+            this.workModeComboBox.Location = new System.Drawing.Point(119, 268);
+            this.workModeComboBox.Name = "workModeComboBox";
+            this.workModeComboBox.Size = new System.Drawing.Size(100, 21);
+            this.workModeComboBox.TabIndex = 30;
+            // 
+            // workNatureComboBox
+            // 
+            this.workNatureComboBox.FormattingEnabled = true;
+            this.workNatureComboBox.Location = new System.Drawing.Point(119, 294);
+            this.workNatureComboBox.Name = "workNatureComboBox";
+            this.workNatureComboBox.Size = new System.Drawing.Size(100, 21);
+            this.workNatureComboBox.TabIndex = 31;
+            // 
             // AddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(244, 387);
+            this.Controls.Add(this.workNatureComboBox);
+            this.Controls.Add(this.workModeComboBox);
+            this.Controls.Add(this.professionsComboBox);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.HeaderLabel);
             this.Controls.Add(full_nameLabel);
             this.Controls.Add(this.full_nameTextBox);
             this.Controls.Add(professionLabel);
-            this.Controls.Add(this.professionTextBox);
             this.Controls.Add(record_of_serviceLabel);
             this.Controls.Add(this.record_of_serviceTextBox);
             this.Controls.Add(pasport_numberLabel);
@@ -347,14 +349,11 @@
             this.Controls.Add(needsLabel);
             this.Controls.Add(this.needsTextBox);
             this.Controls.Add(work_modeLabel);
-            this.Controls.Add(this.work_modeTextBox);
             this.Controls.Add(work_natureLabel);
-            this.Controls.Add(this.work_natureTextBox);
             this.Controls.Add(phone_numberLabel);
             this.Controls.Add(this.phone_numberTextBox);
             this.Name = "AddEmployee";
             this.Text = "AddEmployee";
-            this.Load += new System.EventHandler(this.AddEmployee_Load);
             ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.laborExchangeDataSet)).EndInit();
             this.ResumeLayout(false);
@@ -369,7 +368,6 @@
         private LaborExchangeDataSetTableAdapters.EmployeeTableAdapter employeeTableAdapter;
         private LaborExchangeDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.TextBox full_nameTextBox;
-        private System.Windows.Forms.TextBox professionTextBox;
         private System.Windows.Forms.TextBox record_of_serviceTextBox;
         private System.Windows.Forms.TextBox pasport_numberTextBox;
         private System.Windows.Forms.TextBox special_skillsTextBox;
@@ -377,11 +375,12 @@
         private System.Windows.Forms.TextBox identification_codeTextBox;
         private System.Windows.Forms.TextBox educationTextBox;
         private System.Windows.Forms.TextBox needsTextBox;
-        private System.Windows.Forms.TextBox work_modeTextBox;
-        private System.Windows.Forms.TextBox work_natureTextBox;
         private System.Windows.Forms.TextBox phone_numberTextBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Label HeaderLabel;
+        private System.Windows.Forms.ComboBox professionsComboBox;
+        private System.Windows.Forms.ComboBox workModeComboBox;
+        private System.Windows.Forms.ComboBox workNatureComboBox;
 
     }
 }

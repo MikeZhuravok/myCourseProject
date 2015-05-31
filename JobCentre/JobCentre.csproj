@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LaborExchangeDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Models\Helper.cs" />
     <Compile Include="Views\AddEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +101,12 @@
     </Compile>
     <Compile Include="Views\DataBaseForm.Designer.cs">
       <DependentUpon>DataBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditVacancyRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EditVacancyRequest.Designer.cs">
+      <DependentUpon>EditVacancyRequest.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeFilterForm.cs">
       <SubType>Form</SubType>
@@ -159,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DataBaseForm.resx">
       <DependentUpon>DataBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\EditVacancyRequest.resx">
+      <DependentUpon>EditVacancyRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\EmployeeFilterForm.resx">
       <DependentUpon>EmployeeFilterForm.cs</DependentUpon>
