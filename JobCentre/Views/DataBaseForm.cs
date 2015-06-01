@@ -20,7 +20,7 @@ namespace JobCentre.Views
         public string temp; // change in future
 
         public string sqlString = "";
-
+        public DataTable filterDataTable;
         string tableName { get { return tabControl.SelectedTab.AccessibleDescription; } }
 
         public DataBaseForm()
@@ -31,29 +31,37 @@ namespace JobCentre.Views
 
         private void DataBaseForm_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "laborExchangeDataSet.Vacancy_request". При необходимости она может быть перемещена или удалена.
             this.vacancy_requestTableAdapter.Fill(this.laborExchangeDataSet.Vacancy_request);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "laborExchangeDataSet.Vacancy". При необходимости она может быть перемещена или удалена.
             this.vacancyTableAdapter.Fill(this.laborExchangeDataSet.Vacancy);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "laborExchangeDataSet.Employer". При необходимости она может быть перемещена или удалена.
             this.employerTableAdapter.Fill(this.laborExchangeDataSet.Employer);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "laborExchangeDataSet.Employee". При необходимости она может быть перемещена или удалена.
             this.employeeTableAdapter.Fill(this.laborExchangeDataSet.Employee);
         }
 
-        int selectedIndex // return first element of table
+        int selectedIndex
         {
             get
             {
-                if (MainDataGridView.CurrentRow == null)
-                {
-                    return -1;
-                }
                 int rowIndex = MainDataGridView.CurrentRow.Index;
                 return (int)MainDataGridView.Rows[rowIndex].Cells[0].Value;
             }
         } //  с индексами надо разобраться это не все
 
+        int secondColumn
+        {
+            get
+            {
+                int rowIndex = MainDataGridView.CurrentRow.Index;
+                return (int)MainDataGridView.Rows[rowIndex].Cells[1].Value;
+            }
+        }
+        DateTime thirdColumn
+        {
+            get
+            {
+                int rowIndex = MainDataGridView.CurrentRow.Index;
+                return (DateTime)MainDataGridView.Rows[rowIndex].Cells[2].Value;
+            }
+        }
         private void EditButton_Click(object sender, EventArgs e)
         {
             if (MainDataGridView.CurrentRow == null)
@@ -66,29 +74,31 @@ namespace JobCentre.Views
                 case "Employer":
                     AddEmployer ar = new AddEmployer(selectedIndex);
                     ar.ShowDialog();
+                    this.employerTableAdapter.Fill(this.laborExchangeDataSet.Employer);
+                    MainDataGridView.DataSource = employerTableAdapter.GetData();
                     break;
                 case "Employee":
                     AddEmployee ae = new AddEmployee(selectedIndex);
                     ae.ShowDialog();
+                    this.employeeTableAdapter.Fill(this.laborExchangeDataSet.Employee);
+                    MainDataGridView.DataSource = employeeTableAdapter.GetData();
                     break;
                 case "Vacancy request":
-                    AddVacancyRequest avr = new AddVacancyRequest();
+                    int vacancyId = selectedIndex;
+                    int employerId = secondColumn;
+                    DateTime dt = thirdColumn;
+                    EditVacancyRequest avr = new EditVacancyRequest(vacancyId, employerId, dt);
+                    avr.ShowDialog();
+                    this.vacancy_requestTableAdapter.Fill(this.laborExchangeDataSet.Vacancy_request);
+                    MainDataGridView.DataSource = vacancy_requestTableAdapter.GetData();
                     break;
                 case "Vacancy":
                     AddVacancy av = new AddVacancy(selectedIndex);
                     av.ShowDialog();
+                    this.vacancyTableAdapter.Fill(this.laborExchangeDataSet.Vacancy);
+                    MainDataGridView.DataSource = vacancyTableAdapter.GetData();
                     break;
             }
-
-
-            this.employeeTableAdapter.Fill(this.laborExchangeDataSet.Employee);
-            MainDataGridView.DataSource = employeeTableAdapter.GetData();
-
-            //employeeTableAdapter.Update(this.laborExchangeDataSet);
-            //employerTableAdapter.Update(this.laborExchangeDataSet);
-            //vacancy_requestTableAdapter.Update(this.laborExchangeDataSet);
-            //vacancyTableAdapter.Update(this.laborExchangeDataSet);
-            //tabControl_SelectedIndexChanged(null, null);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -151,39 +161,23 @@ namespace JobCentre.Views
                     form.ShowDialog();
                     if (form.DialogResult != DialogResult.OK)
                         return;
-                    using (SqlConnection sql = new SqlConnection(connectionString))
-                    {
-                        SqlDataAdapter adapter = new SqlDataAdapter(sqlString, sql);
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        MainDataGridView.DataSource = dt;
-                    }
                     break;
                 case "Employee":
                     EmployeeFilterForm eff = new EmployeeFilterForm(this);
                     eff.ShowDialog();
                     if (eff.DialogResult != DialogResult.OK)
                         return;
-                    using (SqlConnection sql = new SqlConnection(connectionString))
-                    {
-                        SqlDataAdapter adapter = new SqlDataAdapter(sqlString, sql);
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
-                        MainDataGridView.DataSource = dt;
-                    }
                     break;
                 case "Vacancy request":
-                    //FindListComboBox.DataSource = new List<string> { "Vacancy ID", "Employee's ID", "Submission date", "Interview date", "Result" };
-                    primaryKey = "Vacancy ID";
+                    VacancyFilterForm vff = new VacancyFilterForm();
+                    vff.ShowDialog();
+                    if (vff.DialogResult != DialogResult.OK)
+                        return;
                     break;
                 case "Vacancy":
-                    //FindListComboBox.DataSource = new List<string> { "Vacancy Id", "Work location", "Social package","Scope",  "Beginning of work", "End of work",
-                    //"Salary", "Features", "Possibility of working minors", "Position", "Type of ownership", "Company name"};
-                    primaryKey = "Vacancy Id";
                     break;
             }
-
-
+            MainDataGridView.DataSource = filterDataTable;
         }
 
         private void Clear_button_Click(object sender, EventArgs e)
@@ -191,7 +185,6 @@ namespace JobCentre.Views
             SearchTextBox.Text = "";
             temp = "";
             sqlString = "";
-            //FindListComboBox.SelectedIndex = 1;
             using (SqlConnection sql = new SqlConnection(connectionString))
             {
                 string sqltemp = String.Format("SELECT * FROM [dbo].[{0}]", tableName);
@@ -228,7 +221,7 @@ namespace JobCentre.Views
                     break;
             }
             Clear_button_Click(null, null);
-
+            filterDataTable = null;
         }
     }
 }

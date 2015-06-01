@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace JobCentre.Views
 {
     public partial class AddVacancy : Form
-    {        
+    {
         string connectionString = Helper.connectionString;
 
         int selectedIndex;
@@ -22,7 +22,7 @@ namespace JobCentre.Views
             selectedIndex = SelIndex;
             InitializeComponent();
 
-             // ComboBox filling
+            // ComboBox filling
             string sqlString;
             using (SqlConnection sql = new SqlConnection(connectionString))
             {
@@ -59,19 +59,20 @@ namespace JobCentre.Views
         {
             decimal salary;
             int employersID;
-            if (work_locationTextBox.Text != "" && social_packageTextBox.Text != "" && scopeComboBox.Text != "" && beginning_of_workTextBox.Text != "" &&
-                end_of_workTextBox.Text != "" && Decimal.TryParse(salaryTextBox.Text, out salary) && featuresTextBox.Text != "" &&
+            if (work_locationTextBox.Text != "" && social_packageTextBox.Text != "" && scopeComboBox.Text != "" && beginningOfWorkDateTimePicker.Text != "" &&
+                endOfWorkDateTimePicker.Value.ToString() != "" && Decimal.TryParse(salaryTextBox.Text, out salary) && featuresTextBox.Text != "" &&
                 possibOfWorkingMinorsComboBox.Text != "" && positionTextBox.Text != "" && typeOfOwnershipComboBox.Text != "" &&
                 company_nameTextBox.Text != "" && Helper.TryParse(employerIdComboBox.Text, out employersID))
             {
                 if (selectedIndex == -1)
                 {
-                    this.vacancyTableAdapter.InsertVacancyQuery(work_locationTextBox.Text, social_packageTextBox.Text, scopeComboBox.Text, beginning_of_workTextBox.Text, end_of_workTextBox.Text, salary, featuresTextBox.Text,
+                    this.vacancyTableAdapter.InsertVacancyQuery(work_locationTextBox.Text, social_packageTextBox.Text, scopeComboBox.Text, beginningOfWorkDateTimePicker.Value.ToString().Split()[1],
+                        endOfWorkDateTimePicker.Value.ToString().Split()[1], salary, featuresTextBox.Text,
                         possibOfWorkingMinorsComboBox.Text, positionTextBox.Text, typeOfOwnershipComboBox.Text, company_nameTextBox.Text, employersID);
                 }
                 else
                 {
-                    this.vacancyTableAdapter.UpdateVacancyQuery(work_locationTextBox.Text, social_packageTextBox.Text, scopeComboBox.Text, beginning_of_workTextBox.Text, end_of_workTextBox.Text, salary, featuresTextBox.Text,
+                    this.vacancyTableAdapter.UpdateVacancyQuery(work_locationTextBox.Text, social_packageTextBox.Text, scopeComboBox.Text, beginningOfWorkDateTimePicker.Text, endOfWorkDateTimePicker.Value.ToString(), salary, featuresTextBox.Text,
                         possibOfWorkingMinorsComboBox.Text, positionTextBox.Text, typeOfOwnershipComboBox.Text, company_nameTextBox.Text, employersID, selectedIndex);
                 }
                 this.vacancyTableAdapter.Update(this.laborExchangeDataSet);

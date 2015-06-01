@@ -15,11 +15,11 @@ namespace JobCentre.Views
         int employerId;
         int vacancyId;
         DateTime submissionTime;
-        public EditVacancyRequest(int vacancy, int employer, string subTime)
+        public EditVacancyRequest(int vacancy, int employer, DateTime subTime)
         {
             employerId = employer;
             vacancyId = vacancy;
-            submissionTime = DateTime.Parse(subTime);
+            submissionTime = subTime;
             InitializeComponent();
         }
 
@@ -31,12 +31,16 @@ namespace JobCentre.Views
         private void editButton_Click(object sender, EventArgs e)
         {
             DateTime interviewDate;
-            bool result;
-            if (DateTime.TryParse(interview_dateDateTimePicker.Text, out interviewDate) && Boolean.TryParse(resultTextBox.Text, out result))
+            if (DateTime.TryParse(interview_dateDateTimePicker.Text, out interviewDate))
             {
-                this.vacancy_requestTableAdapter.UpdateVacRequestQuery(interviewDate, result.ToString(), vacancyId, employerId, submissionTime);
+                this.vacancy_requestTableAdapter.UpdateVacRequestQuery(interviewDate, resultComboBox.Text, vacancyId, employerId, submissionTime);
+                this.DialogResult = DialogResult.OK;
             }
-            else { }
+            else
+            {
+                MessageBox.Show(String.Format("Your data is incorrect"));
+
+            }
         }
     }
 }

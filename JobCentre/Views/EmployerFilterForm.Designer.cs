@@ -90,7 +90,7 @@
             // 
             // FilterButton
             // 
-            this.FilterButton.Location = new System.Drawing.Point(98, 166);
+            this.FilterButton.Location = new System.Drawing.Point(98, 151);
             this.FilterButton.Name = "FilterButton";
             this.FilterButton.Size = new System.Drawing.Size(75, 23);
             this.FilterButton.TabIndex = 6;
@@ -112,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 215);
+            this.ClientSize = new System.Drawing.Size(265, 181);
             this.Controls.Add(this.hasVacanciesCheckBox);
             this.Controls.Add(this.FilterButton);
             this.Controls.Add(this.ToEmployerIdTextBox);

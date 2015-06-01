@@ -120,6 +120,12 @@
     <Compile Include="Views\EmployerFilterForm.Designer.cs">
       <DependentUpon>EmployerFilterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\VacancyFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\VacancyFilterForm.Designer.cs">
+      <DependentUpon>VacancyFilterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\VacanciesView.resx">
       <DependentUpon>VacanciesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\VacancyFilterForm.resx">
+      <DependentUpon>VacancyFilterForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="LaborExchangeDataSet.xsc">
       <DependentUpon>LaborExchangeDataSet.xsd</DependentUpon>

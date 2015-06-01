@@ -36,9 +36,9 @@
             this.vacancy_requestTableAdapter = new JobCentre.LaborExchangeDataSetTableAdapters.Vacancy_requestTableAdapter();
             this.tableAdapterManager = new JobCentre.LaborExchangeDataSetTableAdapters.TableAdapterManager();
             this.interview_dateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.resultTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.editButton = new System.Windows.Forms.Button();
+            this.resultComboBox = new System.Windows.Forms.ComboBox();
             interview_dateLabel = new System.Windows.Forms.Label();
             resultLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.laborExchangeDataSet)).BeginInit();
@@ -48,7 +48,7 @@
             // interview_dateLabel
             // 
             interview_dateLabel.AutoSize = true;
-            interview_dateLabel.Location = new System.Drawing.Point(12, 40);
+            interview_dateLabel.Location = new System.Drawing.Point(12, 37);
             interview_dateLabel.Name = "interview_dateLabel";
             interview_dateLabel.Size = new System.Drawing.Size(77, 13);
             interview_dateLabel.TabIndex = 7;
@@ -57,7 +57,7 @@
             // resultLabel
             // 
             resultLabel.AutoSize = true;
-            resultLabel.Location = new System.Drawing.Point(12, 65);
+            resultLabel.Location = new System.Drawing.Point(12, 60);
             resultLabel.Name = "resultLabel";
             resultLabel.Size = new System.Drawing.Size(40, 13);
             resultLabel.TabIndex = 9;
@@ -89,18 +89,10 @@
             // interview_dateDateTimePicker
             // 
             this.interview_dateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.vacancy_requestBindingSource, "Interview date", true));
-            this.interview_dateDateTimePicker.Location = new System.Drawing.Point(105, 36);
+            this.interview_dateDateTimePicker.Location = new System.Drawing.Point(105, 31);
             this.interview_dateDateTimePicker.Name = "interview_dateDateTimePicker";
             this.interview_dateDateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.interview_dateDateTimePicker.TabIndex = 8;
-            // 
-            // resultTextBox
-            // 
-            this.resultTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancy_requestBindingSource, "Result", true));
-            this.resultTextBox.Location = new System.Drawing.Point(105, 62);
-            this.resultTextBox.Name = "resultTextBox";
-            this.resultTextBox.Size = new System.Drawing.Size(200, 20);
-            this.resultTextBox.TabIndex = 10;
             // 
             // label1
             // 
@@ -121,17 +113,28 @@
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
+            // resultComboBox
+            // 
+            this.resultComboBox.FormattingEnabled = true;
+            this.resultComboBox.Items.AddRange(new object[] {
+            "Postive",
+            "Negative"});
+            this.resultComboBox.Location = new System.Drawing.Point(105, 57);
+            this.resultComboBox.Name = "resultComboBox";
+            this.resultComboBox.Size = new System.Drawing.Size(200, 21);
+            this.resultComboBox.TabIndex = 13;
+            // 
             // EditVacancyRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(318, 127);
+            this.Controls.Add(this.resultComboBox);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(interview_dateLabel);
             this.Controls.Add(this.interview_dateDateTimePicker);
             this.Controls.Add(resultLabel);
-            this.Controls.Add(this.resultTextBox);
             this.Name = "EditVacancyRequest";
             this.Text = "EditVacancyRequest";
             this.Load += new System.EventHandler(this.EditVacancyRequest_Load);
@@ -149,8 +152,8 @@
         private LaborExchangeDataSetTableAdapters.Vacancy_requestTableAdapter vacancy_requestTableAdapter;
         private LaborExchangeDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.DateTimePicker interview_dateDateTimePicker;
-        private System.Windows.Forms.TextBox resultTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.ComboBox resultComboBox;
     }
 }

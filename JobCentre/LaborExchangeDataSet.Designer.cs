@@ -1085,7 +1085,6 @@ namespace JobCentre {
                 this._columnEmployer_s_ID.Unique = true;
                 this.columnFull_name.AllowDBNull = false;
                 this.columnFull_name.MaxLength = 50;
-                this.columnPasport_number.AllowDBNull = false;
                 this.columnPasport_number.MaxLength = 25;
                 this.columnPhone_number.AllowDBNull = false;
                 this.columnPhone_number.MaxLength = 20;
@@ -2292,7 +2291,12 @@ namespace JobCentre {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Pasport_number {
                 get {
-                    return ((string)(this[this.tableEmployer.Pasport_numberColumn]));
+                    try {
+                        return ((string)(this[this.tableEmployer.Pasport_numberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Pasport number\' в таблице \'Employer\' равно DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableEmployer.Pasport_numberColumn] = value;
@@ -2362,6 +2366,18 @@ namespace JobCentre {
                 set {
                     this[this.tableEmployer.Economical_activityColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPasport_numberNull() {
+                return this.IsNull(this.tableEmployer.Pasport_numberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPasport_numberNull() {
+                this[this.tableEmployer.Pasport_numberColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4044,14 +4060,16 @@ VALUES        (@Full_name,@Profession,@Record_of_service,@Pasport_number,@Specia
             tableMapping.ColumnMappings.Add("Individual tax number", "Individual tax number");
             tableMapping.ColumnMappings.Add("Main property type", "Main property type");
             tableMapping.ColumnMappings.Add("Economical activity", "Economical activity");
+            tableMapping.ColumnMappings.Add("Pasport number", "Pasport number");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Employer] WHERE (([Employer's ID] = @p2) AND ([Full name] = @Original_Full_name) AND ([Passport number] = @Original_Passport_number) AND ([Phone number] = @Original_Phone_number) AND ((@IsNull_Bank_details = 1 AND [Bank details] IS NULL) OR ([Bank details] = @Original_Bank_details)) AND ([Individual tax number] = @Original_Individual_tax_number) AND ([Main property type] = @Original_Main_property_type) AND ((@IsNull_Economical_activity = 1 AND [Economical activity] IS NULL) OR ([Economical activity] = @Original_Economical_activity)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Employer] WHERE (([Employer's ID] = @p2) AND ([Full name] = @Original_Full_name) AND ((@IsNull_Pasport_number = 1 AND [Pasport number] IS NULL) OR ([Pasport number] = @Original_Pasport_number)) AND ([Phone number] = @Original_Phone_number) AND ((@IsNull_Bank_details = 1 AND [Bank details] IS NULL) OR ([Bank details] = @Original_Bank_details)) AND ([Individual tax number] = @Original_Individual_tax_number) AND ([Main property type] = @Original_Main_property_type) AND ((@IsNull_Economical_activity = 1 AND [Economical activity] IS NULL) OR ([Economical activity] = @Original_Economical_activity)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p2", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employer\'s ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Full_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Full name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Passport_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Passport number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Pasport_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Pasport number", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Pasport_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Pasport number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Phone_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Bank_details", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Bank details", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Bank_details", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Bank details", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -4061,11 +4079,11 @@ VALUES        (@Full_name,@Profession,@Record_of_service,@Pasport_number,@Specia
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Economical_activity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Economical activity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Employer] ([Full name], [Passport number], [Phone number], [Bank details], [Individual tax number], [Main property type], [Economical activity]) VALUES (@Full_name, @Passport_number, @Phone_number, @Bank_details, @Individual_tax_number, @Main_property_type, @Economical_activity);
-SELECT [Employer's ID], [Full name], [Passport number], [Phone number], [Bank details], [Individual tax number], [Main property type], [Economical activity] FROM Employer WHERE ([Employer's ID] = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Employer] ([Full name], [Pasport number], [Phone number], [Bank details], [Individual tax number], [Main property type], [Economical activity]) VALUES (@Full_name, @Pasport_number, @Phone_number, @Bank_details, @Individual_tax_number, @Main_property_type, @Economical_activity);
+SELECT [Employer's ID], [Full name], [Pasport number], [Phone number], [Bank details], [Individual tax number], [Main property type], [Economical activity] FROM Employer WHERE ([Employer's ID] = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Full_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Full name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Passport_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Passport number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Pasport_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Pasport number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Bank_details", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Bank details", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Individual_tax_number", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "Individual tax number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4073,11 +4091,11 @@ SELECT [Employer's ID], [Full name], [Passport number], [Phone number], [Bank de
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Economical_activity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Economical activity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Employer] SET [Full name] = @Full_name, [Passport number] = @Passport_number, [Phone number] = @Phone_number, [Bank details] = @Bank_details, [Individual tax number] = @Individual_tax_number, [Main property type] = @Main_property_type, [Economical activity] = @Economical_activity WHERE (([Employer's ID] = @p2) AND ([Full name] = @Original_Full_name) AND ([Passport number] = @Original_Passport_number) AND ([Phone number] = @Original_Phone_number) AND ((@IsNull_Bank_details = 1 AND [Bank details] IS NULL) OR ([Bank details] = @Original_Bank_details)) AND ([Individual tax number] = @Original_Individual_tax_number) AND ([Main property type] = @Original_Main_property_type) AND ((@IsNull_Economical_activity = 1 AND [Economical activity] IS NULL) OR ([Economical activity] = @Original_Economical_activity)));
-SELECT [Employer's ID], [Full name], [Passport number], [Phone number], [Bank details], [Individual tax number], [Main property type], [Economical activity] FROM Employer WHERE ([Employer's ID] = @Employer_s_ID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Employer] SET [Full name] = @Full_name, [Pasport number] = @Pasport_number, [Phone number] = @Phone_number, [Bank details] = @Bank_details, [Individual tax number] = @Individual_tax_number, [Main property type] = @Main_property_type, [Economical activity] = @Economical_activity WHERE (([Employer's ID] = @p2) AND ([Full name] = @Original_Full_name) AND ((@IsNull_Pasport_number = 1 AND [Pasport number] IS NULL) OR ([Pasport number] = @Original_Pasport_number)) AND ([Phone number] = @Original_Phone_number) AND ((@IsNull_Bank_details = 1 AND [Bank details] IS NULL) OR ([Bank details] = @Original_Bank_details)) AND ([Individual tax number] = @Original_Individual_tax_number) AND ([Main property type] = @Original_Main_property_type) AND ((@IsNull_Economical_activity = 1 AND [Economical activity] IS NULL) OR ([Economical activity] = @Original_Economical_activity)));
+SELECT [Employer's ID], [Full name], [Pasport number], [Phone number], [Bank details], [Individual tax number], [Main property type], [Economical activity] FROM Employer WHERE ([Employer's ID] = @Employer_s_ID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Full_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Full name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Passport_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Passport number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Pasport_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Pasport number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Phone_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Bank_details", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Bank details", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Individual_tax_number", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "Individual tax number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4085,7 +4103,8 @@ SELECT [Employer's ID], [Full name], [Passport number], [Phone number], [Bank de
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Economical_activity", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Economical activity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@p2", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Employer\'s ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Full_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Full name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Passport_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Passport number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Pasport_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Pasport number", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Pasport_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Pasport number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Phone_number", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Phone number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Bank_details", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Bank details", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Bank_details", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Bank details", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -4109,9 +4128,9 @@ SELECT [Employer's ID], [Full name], [Passport number], [Phone number], [Bank de
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT [Employer\'s ID], [Full name], [Passport number], [Phone number], [Bank det" +
-                "ails], [Individual tax number], [Main property type], [Economical activity] FROM" +
-                " dbo.Employer";
+            this._commandCollection[0].CommandText = "SELECT [Employer\'s ID], [Full name], [Pasport number], [Phone number], [Bank deta" +
+                "ils], [Individual tax number], [Main property type], [Economical activity] FROM " +
+                "dbo.Employer";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -4120,9 +4139,9 @@ SELECT [Employer's ID], [Full name], [Passport number], [Phone number], [Bank de
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Employer\'s ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT [Full name], [Pasport number], [Phone number], [Bank details], [Individual" +
-                " tax number], [Main property type], [Economical activity] FROM dbo.Employer WHER" +
-                "E [Employer\'s ID] = @id";
+            this._commandCollection[2].CommandText = "SELECT [Bank details], [Economical activity], [Employer\'s ID], [Full name], [Indi" +
+                "vidual tax number], [Main property type], [Pasport number], [Phone number] FROM " +
+                "Employer WHERE ([Employer\'s ID] = @id)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Employer\'s ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
@@ -4215,252 +4234,6 @@ SELECT [Employer's ID], [Full name], [Passport number], [Phone number], [Bank de
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int p2, string Original_Full_name, string Original_Passport_number, string Original_Phone_number, string Original_Bank_details, decimal Original_Individual_tax_number, string Original_Main_property_type, string Original_Economical_activity) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(p2));
-            if ((Original_Full_name == null)) {
-                throw new global::System.ArgumentNullException("Original_Full_name");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_Full_name));
-            }
-            if ((Original_Passport_number == null)) {
-                throw new global::System.ArgumentNullException("Original_Passport_number");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_Passport_number));
-            }
-            if ((Original_Phone_number == null)) {
-                throw new global::System.ArgumentNullException("Original_Phone_number");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Phone_number));
-            }
-            if ((Original_Bank_details == null)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_Bank_details));
-            }
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_Individual_tax_number));
-            if ((Original_Main_property_type == null)) {
-                throw new global::System.ArgumentNullException("Original_Main_property_type");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(Original_Main_property_type));
-            }
-            if ((Original_Economical_activity == null)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_Economical_activity));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Full_name, string Passport_number, string Phone_number, string Bank_details, decimal Individual_tax_number, string Main_property_type, string Economical_activity) {
-            if ((Full_name == null)) {
-                throw new global::System.ArgumentNullException("Full_name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Full_name));
-            }
-            if ((Passport_number == null)) {
-                throw new global::System.ArgumentNullException("Passport_number");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Passport_number));
-            }
-            if ((Phone_number == null)) {
-                throw new global::System.ArgumentNullException("Phone_number");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Phone_number));
-            }
-            if ((Bank_details == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Bank_details));
-            }
-            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(Individual_tax_number));
-            if ((Main_property_type == null)) {
-                throw new global::System.ArgumentNullException("Main_property_type");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(Main_property_type));
-            }
-            if ((Economical_activity == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(Economical_activity));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string Full_name, 
-                    string Passport_number, 
-                    string Phone_number, 
-                    string Bank_details, 
-                    decimal Individual_tax_number, 
-                    string Main_property_type, 
-                    string Economical_activity, 
-                    int p2, 
-                    string Original_Full_name, 
-                    string Original_Passport_number, 
-                    string Original_Phone_number, 
-                    string Original_Bank_details, 
-                    decimal Original_Individual_tax_number, 
-                    string Original_Main_property_type, 
-                    string Original_Economical_activity, 
-                    int Employer_s_ID) {
-            if ((Full_name == null)) {
-                throw new global::System.ArgumentNullException("Full_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Full_name));
-            }
-            if ((Passport_number == null)) {
-                throw new global::System.ArgumentNullException("Passport_number");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Passport_number));
-            }
-            if ((Phone_number == null)) {
-                throw new global::System.ArgumentNullException("Phone_number");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Phone_number));
-            }
-            if ((Bank_details == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Bank_details));
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Individual_tax_number));
-            if ((Main_property_type == null)) {
-                throw new global::System.ArgumentNullException("Main_property_type");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Main_property_type));
-            }
-            if ((Economical_activity == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Economical_activity));
-            }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(p2));
-            if ((Original_Full_name == null)) {
-                throw new global::System.ArgumentNullException("Original_Full_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_Full_name));
-            }
-            if ((Original_Passport_number == null)) {
-                throw new global::System.ArgumentNullException("Original_Passport_number");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Passport_number));
-            }
-            if ((Original_Phone_number == null)) {
-                throw new global::System.ArgumentNullException("Original_Phone_number");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Phone_number));
-            }
-            if ((Original_Bank_details == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_Bank_details));
-            }
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_Individual_tax_number));
-            if ((Original_Main_property_type == null)) {
-                throw new global::System.ArgumentNullException("Original_Main_property_type");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_Main_property_type));
-            }
-            if ((Original_Economical_activity == null)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_Economical_activity));
-            }
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Employer_s_ID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Full_name, string Passport_number, string Phone_number, string Bank_details, decimal Individual_tax_number, string Main_property_type, string Economical_activity, int p2, string Original_Full_name, string Original_Passport_number, string Original_Phone_number, string Original_Bank_details, decimal Original_Individual_tax_number, string Original_Main_property_type, string Original_Economical_activity) {
-            return this.Update(Full_name, Passport_number, Phone_number, Bank_details, Individual_tax_number, Main_property_type, Economical_activity, p2, Original_Full_name, Original_Passport_number, Original_Phone_number, Original_Bank_details, Original_Individual_tax_number, Original_Main_property_type, Original_Economical_activity, p2);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

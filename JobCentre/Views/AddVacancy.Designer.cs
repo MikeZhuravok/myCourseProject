@@ -45,7 +45,6 @@
             this.laborExchangeDataSet = new JobCentre.LaborExchangeDataSet();
             this.work_locationTextBox = new System.Windows.Forms.TextBox();
             this.social_packageTextBox = new System.Windows.Forms.TextBox();
-            this.end_of_workTextBox = new System.Windows.Forms.TextBox();
             this.salaryTextBox = new System.Windows.Forms.TextBox();
             this.featuresTextBox = new System.Windows.Forms.TextBox();
             this.positionTextBox = new System.Windows.Forms.TextBox();
@@ -58,7 +57,8 @@
             this.typeOfOwnershipComboBox = new System.Windows.Forms.ComboBox();
             this.scopeComboBox = new System.Windows.Forms.ComboBox();
             this.possibOfWorkingMinorsComboBox = new System.Windows.Forms.ComboBox();
-            this.beginning_of_workTextBox = new System.Windows.Forms.TextBox();
+            this.beginningOfWorkDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.endOfWorkDateTimePicker = new System.Windows.Forms.DateTimePicker();
             work_locationLabel = new System.Windows.Forms.Label();
             social_packageLabel = new System.Windows.Forms.Label();
             scopeLabel = new System.Windows.Forms.Label();
@@ -198,7 +198,7 @@
             this.work_locationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancyBindingSource, "Work location", true));
             this.work_locationTextBox.Location = new System.Drawing.Point(157, 32);
             this.work_locationTextBox.Name = "work_locationTextBox";
-            this.work_locationTextBox.Size = new System.Drawing.Size(141, 20);
+            this.work_locationTextBox.Size = new System.Drawing.Size(200, 20);
             this.work_locationTextBox.TabIndex = 4;
             // 
             // social_packageTextBox
@@ -206,23 +206,15 @@
             this.social_packageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancyBindingSource, "Social package", true));
             this.social_packageTextBox.Location = new System.Drawing.Point(157, 58);
             this.social_packageTextBox.Name = "social_packageTextBox";
-            this.social_packageTextBox.Size = new System.Drawing.Size(141, 20);
+            this.social_packageTextBox.Size = new System.Drawing.Size(200, 20);
             this.social_packageTextBox.TabIndex = 6;
-            // 
-            // end_of_workTextBox
-            // 
-            this.end_of_workTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancyBindingSource, "End of work", true));
-            this.end_of_workTextBox.Location = new System.Drawing.Point(157, 136);
-            this.end_of_workTextBox.Name = "end_of_workTextBox";
-            this.end_of_workTextBox.Size = new System.Drawing.Size(141, 20);
-            this.end_of_workTextBox.TabIndex = 12;
             // 
             // salaryTextBox
             // 
             this.salaryTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancyBindingSource, "Salary", true));
             this.salaryTextBox.Location = new System.Drawing.Point(157, 162);
             this.salaryTextBox.Name = "salaryTextBox";
-            this.salaryTextBox.Size = new System.Drawing.Size(141, 20);
+            this.salaryTextBox.Size = new System.Drawing.Size(202, 20);
             this.salaryTextBox.TabIndex = 14;
             // 
             // featuresTextBox
@@ -230,7 +222,7 @@
             this.featuresTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancyBindingSource, "Features", true));
             this.featuresTextBox.Location = new System.Drawing.Point(157, 188);
             this.featuresTextBox.Name = "featuresTextBox";
-            this.featuresTextBox.Size = new System.Drawing.Size(141, 20);
+            this.featuresTextBox.Size = new System.Drawing.Size(202, 20);
             this.featuresTextBox.TabIndex = 16;
             // 
             // positionTextBox
@@ -238,7 +230,7 @@
             this.positionTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancyBindingSource, "Position", true));
             this.positionTextBox.Location = new System.Drawing.Point(157, 240);
             this.positionTextBox.Name = "positionTextBox";
-            this.positionTextBox.Size = new System.Drawing.Size(141, 20);
+            this.positionTextBox.Size = new System.Drawing.Size(202, 20);
             this.positionTextBox.TabIndex = 20;
             // 
             // company_nameTextBox
@@ -246,7 +238,7 @@
             this.company_nameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancyBindingSource, "Company name", true));
             this.company_nameTextBox.Location = new System.Drawing.Point(157, 292);
             this.company_nameTextBox.Name = "company_nameTextBox";
-            this.company_nameTextBox.Size = new System.Drawing.Size(141, 20);
+            this.company_nameTextBox.Size = new System.Drawing.Size(202, 20);
             this.company_nameTextBox.TabIndex = 24;
             // 
             // HeaderLabel
@@ -286,7 +278,7 @@
             this.employerIdComboBox.FormattingEnabled = true;
             this.employerIdComboBox.Location = new System.Drawing.Point(157, 321);
             this.employerIdComboBox.Name = "employerIdComboBox";
-            this.employerIdComboBox.Size = new System.Drawing.Size(139, 21);
+            this.employerIdComboBox.Size = new System.Drawing.Size(200, 21);
             this.employerIdComboBox.TabIndex = 30;
             // 
             // typeOfOwnershipComboBox
@@ -297,7 +289,7 @@
             "Legal"});
             this.typeOfOwnershipComboBox.Location = new System.Drawing.Point(157, 265);
             this.typeOfOwnershipComboBox.Name = "typeOfOwnershipComboBox";
-            this.typeOfOwnershipComboBox.Size = new System.Drawing.Size(139, 21);
+            this.typeOfOwnershipComboBox.Size = new System.Drawing.Size(200, 21);
             this.typeOfOwnershipComboBox.TabIndex = 31;
             // 
             // scopeComboBox
@@ -305,7 +297,7 @@
             this.scopeComboBox.FormattingEnabled = true;
             this.scopeComboBox.Location = new System.Drawing.Point(157, 83);
             this.scopeComboBox.Name = "scopeComboBox";
-            this.scopeComboBox.Size = new System.Drawing.Size(141, 21);
+            this.scopeComboBox.Size = new System.Drawing.Size(200, 21);
             this.scopeComboBox.TabIndex = 32;
             // 
             // possibOfWorkingMinorsComboBox
@@ -316,22 +308,36 @@
             "No"});
             this.possibOfWorkingMinorsComboBox.Location = new System.Drawing.Point(157, 213);
             this.possibOfWorkingMinorsComboBox.Name = "possibOfWorkingMinorsComboBox";
-            this.possibOfWorkingMinorsComboBox.Size = new System.Drawing.Size(139, 21);
+            this.possibOfWorkingMinorsComboBox.Size = new System.Drawing.Size(200, 21);
             this.possibOfWorkingMinorsComboBox.TabIndex = 33;
             // 
-            // beginning_of_workTextBox
+            // beginningOfWorkDateTimePicker
             // 
-            this.beginning_of_workTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vacancyBindingSource, "Beginning of work", true));
-            this.beginning_of_workTextBox.Location = new System.Drawing.Point(157, 110);
-            this.beginning_of_workTextBox.Name = "beginning_of_workTextBox";
-            this.beginning_of_workTextBox.Size = new System.Drawing.Size(141, 20);
-            this.beginning_of_workTextBox.TabIndex = 10;
+            this.beginningOfWorkDateTimePicker.CustomFormat = "HH:mm";
+            this.beginningOfWorkDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.beginningOfWorkDateTimePicker.Location = new System.Drawing.Point(157, 110);
+            this.beginningOfWorkDateTimePicker.Name = "beginningOfWorkDateTimePicker";
+            this.beginningOfWorkDateTimePicker.ShowUpDown = true;
+            this.beginningOfWorkDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.beginningOfWorkDateTimePicker.TabIndex = 34;
+            // 
+            // endOfWorkDateTimePicker
+            // 
+            this.endOfWorkDateTimePicker.CustomFormat = "HH:mm";
+            this.endOfWorkDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endOfWorkDateTimePicker.Location = new System.Drawing.Point(157, 136);
+            this.endOfWorkDateTimePicker.Name = "endOfWorkDateTimePicker";
+            this.endOfWorkDateTimePicker.ShowUpDown = true;
+            this.endOfWorkDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.endOfWorkDateTimePicker.TabIndex = 35;
             // 
             // AddVacancy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 379);
+            this.Controls.Add(this.endOfWorkDateTimePicker);
+            this.Controls.Add(this.beginningOfWorkDateTimePicker);
             this.Controls.Add(this.possibOfWorkingMinorsComboBox);
             this.Controls.Add(this.scopeComboBox);
             this.Controls.Add(this.typeOfOwnershipComboBox);
@@ -344,9 +350,7 @@
             this.Controls.Add(this.social_packageTextBox);
             this.Controls.Add(scopeLabel);
             this.Controls.Add(beginning_of_workLabel);
-            this.Controls.Add(this.beginning_of_workTextBox);
             this.Controls.Add(end_of_workLabel);
-            this.Controls.Add(this.end_of_workTextBox);
             this.Controls.Add(salaryLabel);
             this.Controls.Add(this.salaryTextBox);
             this.Controls.Add(featuresLabel);
@@ -375,7 +379,6 @@
         private LaborExchangeDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.TextBox work_locationTextBox;
         private System.Windows.Forms.TextBox social_packageTextBox;
-        private System.Windows.Forms.TextBox end_of_workTextBox;
         private System.Windows.Forms.TextBox salaryTextBox;
         private System.Windows.Forms.TextBox featuresTextBox;
         private System.Windows.Forms.TextBox positionTextBox;
@@ -386,7 +389,8 @@
         private System.Windows.Forms.ComboBox typeOfOwnershipComboBox;
         private System.Windows.Forms.ComboBox scopeComboBox;
         private System.Windows.Forms.ComboBox possibOfWorkingMinorsComboBox;
-        private System.Windows.Forms.TextBox beginning_of_workTextBox;
+        private System.Windows.Forms.DateTimePicker beginningOfWorkDateTimePicker;
+        private System.Windows.Forms.DateTimePicker endOfWorkDateTimePicker;
 
     }
 }
