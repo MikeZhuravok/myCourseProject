@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System" />
@@ -71,6 +74,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LaborExchangeDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Models\Exporter.cs" />
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Views\AddEmployee.cs">
       <SubType>Form</SubType>
@@ -96,6 +100,24 @@
     <Compile Include="Views\AddVacancyRequest.Designer.cs">
       <DependentUpon>AddVacancyRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\EmployersStatisticView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EmployersStatisticView.Designer.cs">
+      <DependentUpon>EmployersStatisticView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfessionsStatisticsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ProfessionsStatisticsView.Designer.cs">
+      <DependentUpon>ProfessionsStatisticsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompanyStatisticsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CompanyStatisticsView.Designer.cs">
+      <DependentUpon>CompanyStatisticsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\DataBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +141,12 @@
     </Compile>
     <Compile Include="Views\EmployerFilterForm.Designer.cs">
       <DependentUpon>EmployerFilterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SureForm.Designer.cs">
+      <DependentUpon>SureForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\VacancyFilterForm.cs">
       <SubType>Form</SubType>
@@ -158,6 +186,12 @@
     <Compile Include="Views\VacanciesView.Designer.cs">
       <DependentUpon>VacanciesView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\VacancyRequestFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\VacancyRequestFilterForm.Designer.cs">
+      <DependentUpon>VacancyRequestFilterForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\AddEmployee.resx">
       <DependentUpon>AddEmployee.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,6 +203,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddVacancyRequest.resx">
       <DependentUpon>AddVacancyRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\EmployersStatisticView.resx">
+      <DependentUpon>EmployersStatisticView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ProfessionsStatisticsView.resx">
+      <DependentUpon>ProfessionsStatisticsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CompanyStatisticsView.resx">
+      <DependentUpon>CompanyStatisticsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DataBaseForm.resx">
       <DependentUpon>DataBaseForm.cs</DependentUpon>
@@ -197,6 +240,9 @@
     <EmbeddedResource Include="Views\Sql query editor.resx">
       <DependentUpon>Sql query editor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\SureForm.resx">
+      <DependentUpon>SureForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\VacancyDateDetails.resx">
       <DependentUpon>VacancyDateDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\VacancyFilterForm.resx">
       <DependentUpon>VacancyFilterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\VacancyRequestFilterForm.resx">
+      <DependentUpon>VacancyRequestFilterForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="LaborExchangeDataSet.xsc">
       <DependentUpon>LaborExchangeDataSet.xsd</DependentUpon>
@@ -233,7 +282,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\LaborExchange.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

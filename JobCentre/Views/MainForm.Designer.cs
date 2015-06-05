@@ -34,17 +34,22 @@
             this.sqlQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vacancyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vacancyRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.freeVacancysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.averageSalaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.companiesStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vacancyInterviewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshViewButton = new System.Windows.Forms.Button();
             this.AvgSlryDataGridView = new System.Windows.Forms.DataGridView();
             this.avgSalarylabel = new System.Windows.Forms.Label();
             this.interviewsReportSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.employerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vacancyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vacancyRequestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AvgSlryDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -103,10 +108,34 @@
             this.employeeToolStripMenuItem.Text = "Employee...";
             this.employeeToolStripMenuItem.Click += new System.EventHandler(this.employeeToolStripMenuItem_Click);
             // 
+            // employerToolStripMenuItem
+            // 
+            this.employerToolStripMenuItem.Name = "employerToolStripMenuItem";
+            this.employerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.employerToolStripMenuItem.Text = "Employer...";
+            this.employerToolStripMenuItem.Click += new System.EventHandler(this.employerToolStripMenuItem_Click);
+            // 
+            // vacancyToolStripMenuItem
+            // 
+            this.vacancyToolStripMenuItem.Name = "vacancyToolStripMenuItem";
+            this.vacancyToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.vacancyToolStripMenuItem.Text = "Vacancy...";
+            this.vacancyToolStripMenuItem.Click += new System.EventHandler(this.vacancyToolStripMenuItem_Click);
+            // 
+            // vacancyRequestToolStripMenuItem
+            // 
+            this.vacancyRequestToolStripMenuItem.Name = "vacancyRequestToolStripMenuItem";
+            this.vacancyRequestToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.vacancyRequestToolStripMenuItem.Text = "Vacancy request...";
+            this.vacancyRequestToolStripMenuItem.Click += new System.EventHandler(this.vacancyRequestToolStripMenuItem_Click);
+            // 
             // statisticsToolStripMenuItem
             // 
             this.statisticsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.freeVacancysToolStripMenuItem});
+            this.freeVacancysToolStripMenuItem,
+            this.averageSalaryToolStripMenuItem,
+            this.companiesStatisticsToolStripMenuItem,
+            this.employersToolStripMenuItem});
             this.statisticsToolStripMenuItem.Name = "statisticsToolStripMenuItem";
             this.statisticsToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.statisticsToolStripMenuItem.Text = "Statistics";
@@ -118,10 +147,33 @@
             this.freeVacancysToolStripMenuItem.Text = "Vacancies";
             this.freeVacancysToolStripMenuItem.Click += new System.EventHandler(this.freeVacancysToolStripMenuItem_Click);
             // 
+            // averageSalaryToolStripMenuItem
+            // 
+            this.averageSalaryToolStripMenuItem.Name = "averageSalaryToolStripMenuItem";
+            this.averageSalaryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.averageSalaryToolStripMenuItem.Text = "Professions";
+            this.averageSalaryToolStripMenuItem.Click += new System.EventHandler(this.averageSalaryToolStripMenuItem_Click);
+            // 
+            // companiesStatisticsToolStripMenuItem
+            // 
+            this.companiesStatisticsToolStripMenuItem.Name = "companiesStatisticsToolStripMenuItem";
+            this.companiesStatisticsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.companiesStatisticsToolStripMenuItem.Text = "Companies";
+            this.companiesStatisticsToolStripMenuItem.Click += new System.EventHandler(this.companiesStatisticsToolStripMenuItem_Click);
+            // 
+            // employersToolStripMenuItem
+            // 
+            this.employersToolStripMenuItem.Name = "employersToolStripMenuItem";
+            this.employersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.employersToolStripMenuItem.Text = "Employers";
+            this.employersToolStripMenuItem.Click += new System.EventHandler(this.employersToolStripMenuItem_Click);
+            // 
             // reportsToolStripMenuItem
             // 
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vacancyInterviewsToolStripMenuItem});
+            this.vacancyInterviewsToolStripMenuItem,
+            this.reportToolStripMenuItem,
+            this.employerToolStripMenuItem1});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
@@ -132,6 +184,13 @@
             this.vacancyInterviewsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.vacancyInterviewsToolStripMenuItem.Text = "Vacancy interviews";
             this.vacancyInterviewsToolStripMenuItem.Click += new System.EventHandler(this.vacancyInterviewsToolStripMenuItem_Click);
+            // 
+            // reportToolStripMenuItem
+            // 
+            this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
+            this.reportToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.reportToolStripMenuItem.Text = "Employee\'s";
+            this.reportToolStripMenuItem.Click += new System.EventHandler(this.reportToolStripMenuItem_Click);
             // 
             // RefreshViewButton
             // 
@@ -160,26 +219,12 @@
             this.avgSalarylabel.TabIndex = 3;
             this.avgSalarylabel.Text = "Professions count form different companies";
             // 
-            // employerToolStripMenuItem
+            // employerToolStripMenuItem1
             // 
-            this.employerToolStripMenuItem.Name = "employerToolStripMenuItem";
-            this.employerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.employerToolStripMenuItem.Text = "Employer...";
-            this.employerToolStripMenuItem.Click += new System.EventHandler(this.employerToolStripMenuItem_Click);
-            // 
-            // vacancyToolStripMenuItem
-            // 
-            this.vacancyToolStripMenuItem.Name = "vacancyToolStripMenuItem";
-            this.vacancyToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.vacancyToolStripMenuItem.Text = "Vacancy...";
-            this.vacancyToolStripMenuItem.Click += new System.EventHandler(this.vacancyToolStripMenuItem_Click);
-            // 
-            // vacancyRequestToolStripMenuItem
-            // 
-            this.vacancyRequestToolStripMenuItem.Name = "vacancyRequestToolStripMenuItem";
-            this.vacancyRequestToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.vacancyRequestToolStripMenuItem.Text = "Vacancy request...";
-            this.vacancyRequestToolStripMenuItem.Click += new System.EventHandler(this.vacancyRequestToolStripMenuItem_Click);
+            this.employerToolStripMenuItem1.Name = "employerToolStripMenuItem1";
+            this.employerToolStripMenuItem1.Size = new System.Drawing.Size(174, 22);
+            this.employerToolStripMenuItem1.Text = "Employer";
+            this.employerToolStripMenuItem1.Click += new System.EventHandler(this.employerToolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -220,6 +265,11 @@
         private System.Windows.Forms.ToolStripMenuItem employerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vacancyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vacancyRequestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem averageSalaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem companiesStatisticsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem employersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem employerToolStripMenuItem1;
     }
 }
 

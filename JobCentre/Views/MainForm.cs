@@ -17,7 +17,7 @@ namespace JobCentre.Views
     public partial class MainForm : Form
     {
         string connectionString = Helper.connectionString;
-
+        DataBaseForm dbForm;
         public MainForm()
         {
             InitializeComponent();
@@ -26,13 +26,8 @@ namespace JobCentre.Views
         private void dataBasesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             DataBaseForm form = new DataBaseForm();
+            dbForm = form;
             form.Show();
-        }
-
-        private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddEmployee ae = new AddEmployee();
-            ae.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e) // если убрать дублирование, исчезнет обновление дата тейбла
@@ -99,9 +94,11 @@ namespace JobCentre.Views
             //Interviews_report ir = new Interviews_report();
             //ir.Show();
 
-            string template = "\tReport about interviews\n\n\tInterviews without result:\n\n{0}\n\n\tPositive interviews:\n\n{1}\n\n\tNegative interviews:\n\n{2}";
+            string template = "\tReport about interviews\n\n\tInterviews without result:\n\n{0}\n\n\tPositive interviews:\n\n{1}\n\n\tNegative interviews:\n\n{2}\n\nSign _____________\n\nCertified by: ";
             interviewsReportSaveFileDialog.ShowDialog();
-            string filepath = interviewsReportSaveFileDialog.FileName;
+            string filepath = interviewsReportSaveFileDialog.FileName + ".doc";
+            if (filepath == ".doc")
+                return;
             string interviewsWithout = "", positive = "", negative = "";
             using (StreamWriter writer = new StreamWriter(filepath))
             {
@@ -150,18 +147,90 @@ namespace JobCentre.Views
         {
             AddEmployer ae = new AddEmployer();
             ae.ShowDialog();
+            updateIfNotNull();
         }
 
         private void vacancyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddVacancy av = new AddVacancy();
             av.ShowDialog();
+            updateIfNotNull();
         }
 
         private void vacancyRequestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddVacancyRequest avr = new AddVacancyRequest();
             avr.ShowDialog();
+            updateIfNotNull();
+        }
+
+        private void employeeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddEmployee ae = new AddEmployee();
+            ae.ShowDialog();
+            updateIfNotNull();
+        }
+
+        private void updateIfNotNull()
+        {
+            if (dbForm != null)
+                dbForm.tabControl_SelectedIndexChanged(null, null);
+
+        }
+
+        private void averageSalaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProfessionsStatisticsView asv = new ProfessionsStatisticsView();
+            asv.Show();
+        }
+
+        private void companiesStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CompanyStatisticsView csv = new CompanyStatisticsView();
+            csv.Show();
+        }
+
+        private void employersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmployersStatisticView esv = new EmployersStatisticView();
+            esv.Show();
+        }
+
+        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //interviewsReportSaveFileDialog.ShowDialog();
+            //string filepath = interviewsReportSaveFileDialog.FileName + ".csv";
+            //if (filepath == "")
+            //    return;
+            string sqlString = String.Format("SELECT [Full name], Profession, [Special skills], Education FROM Employee");
+
+            using (SqlConnection sql = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlString, sql);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                DataGridView dgv = new DataGridView();
+                dgv.DataSource = dt;
+                Exporter.ToExcel(dgv, System.Drawing.Color.FromArgb(230, 84, 0),
+                    System.Drawing.Color.White, 14, 13, null);
+            }
+        }
+
+        private void employerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string sqlString = String.Format("SELECT Employer.[Employer's ID], [Full name], [Company name], COUNT(*) AS 'Vacancy count', SUM(Salary) * 0.15 AS 'Potential tax'  FROM Employer, " +
+            "Vacancy WHERE Employer.[Employer's ID] = Vacancy.[Employer's ID] GROUP BY Employer.[Employer's ID],[Full name], [Company name]");
+
+            using (SqlConnection sql = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlString, sql);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                DataGridView dgv = new DataGridView();
+                dgv.DataSource = dt;
+                Exporter.ToExcel(dgv, System.Drawing.Color.FromArgb(230, 84, 0),
+                    System.Drawing.Color.White, 14, 13, null);
+            }
         }
     }
 }

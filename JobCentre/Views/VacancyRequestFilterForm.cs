@@ -12,11 +12,11 @@ using System.Windows.Forms;
 
 namespace JobCentre.Views
 {
-    public partial class EmployerFilterForm : Form
+    public partial class VacancyRequestFilterForm : Form
     {
         string connectionString = Helper.connectionString;
         DataBaseForm form;
-        public EmployerFilterForm(DataBaseForm dbForm)
+        public VacancyRequestFilterForm(DataBaseForm dbForm)
         {
             InitializeComponent();
             form = dbForm;
@@ -25,19 +25,15 @@ namespace JobCentre.Views
         private void FilterButton_Click(object sender, EventArgs e)
         {
             string sqlString;
-            int from, to;
-            string forAnd = "";
-            if (hasVacanciesCheckBox.Checked)
-            {
-                sqlString = "SELECT DISTINCT [Employer].* FROM [Employer], [Vacancy] WHERE [Employer].[Employer's ID] = [Vacancy].[Employer's ID] ";
-                forAnd = " AND";
-            }
-            else
-            {
-                sqlString = "SELECT * FROM [Employer] WHERE ";
-            }
-            if (int.TryParse(FromEmployerIdTextBox.Text, out from) && int.TryParse(ToEmployerIdTextBox.Text, out to))
-                sqlString += String.Format(" {0} [Employer].[Employer's ID] BETWEEN {1} AND {2}", forAnd, from, to);
+            DateTime from = fromDateTimePicker.Value;
+            bool positive = isPositiveResultCheckBox.Checked;
+            string forResult = "";
+            if (positive)
+                forResult = " AND Result = 'Positive'";
+
+            string fromTime = String.Format("{0}:{1}", from.Hour, from.Minute);
+
+            sqlString = String.Format("SELECT * FROM [Vacancy Request] WHERE [Interview date] > '{0}'{1};", fromTime, forResult);
 
             using (SqlConnection sql = new SqlConnection(connectionString))
             {
@@ -45,8 +41,9 @@ namespace JobCentre.Views
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 form.filterDataTable = dt;
-            }            
+            }
             DialogResult = DialogResult.OK;
+
         }
     }
 }

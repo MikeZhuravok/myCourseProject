@@ -2,6 +2,10 @@
     
     
     public partial class LaborExchangeDataSet {
+        partial class VacancyDataTable
+        {
+        }
+    
         partial class EmployeeDataTable
         {
         }

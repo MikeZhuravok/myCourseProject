@@ -45,7 +45,7 @@ namespace JobCentre.Views
                 SqlDataAdapter adapter = new SqlDataAdapter(sqlString, sql);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
-                dbform.filterDataTable = dt.Clone();
+                dbform.filterDataTable = dt;
             }    
             DialogResult = DialogResult.OK;
 

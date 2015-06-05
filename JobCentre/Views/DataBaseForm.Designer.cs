@@ -51,6 +51,7 @@
             this.vacancyTableAdapter = new JobCentre.LaborExchangeDataSetTableAdapters.VacancyTableAdapter();
             this.vacancy_requestTableAdapter = new JobCentre.LaborExchangeDataSetTableAdapters.Vacancy_requestTableAdapter();
             this.employeeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.currentHeaderComboBox = new System.Windows.Forms.ComboBox();
             EmployeeTabPage = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.MainDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
@@ -116,7 +117,7 @@
             // 
             // SearchTextBox
             // 
-            this.SearchTextBox.Location = new System.Drawing.Point(390, 515);
+            this.SearchTextBox.Location = new System.Drawing.Point(369, 515);
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.Size = new System.Drawing.Size(152, 20);
             this.SearchTextBox.TabIndex = 7;
@@ -125,7 +126,7 @@
             // SearchLabel
             // 
             this.SearchLabel.AutoSize = true;
-            this.SearchLabel.Location = new System.Drawing.Point(327, 517);
+            this.SearchLabel.Location = new System.Drawing.Point(306, 517);
             this.SearchLabel.Name = "SearchLabel";
             this.SearchLabel.Size = new System.Drawing.Size(44, 13);
             this.SearchLabel.TabIndex = 6;
@@ -231,11 +232,21 @@
             this.employeeBindingSource1.DataMember = "Employee";
             this.employeeBindingSource1.DataSource = this.laborExchangeDataSet;
             // 
+            // currentHeaderComboBox
+            // 
+            this.currentHeaderComboBox.FormattingEnabled = true;
+            this.currentHeaderComboBox.Location = new System.Drawing.Point(527, 514);
+            this.currentHeaderComboBox.Name = "currentHeaderComboBox";
+            this.currentHeaderComboBox.Size = new System.Drawing.Size(175, 21);
+            this.currentHeaderComboBox.TabIndex = 10;
+            this.currentHeaderComboBox.SelectedIndexChanged += new System.EventHandler(this.currentHeaderComboBox_SelectedIndexChanged);
+            // 
             // DataBaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 542);
+            this.Controls.Add(this.currentHeaderComboBox);
             this.Controls.Add(this.MainDataGridView);
             this.Controls.Add(this.Clear_button);
             this.Controls.Add(this.tabControl);
@@ -284,6 +295,7 @@
         private System.Windows.Forms.Label SearchLabel;
         private System.Windows.Forms.Button FilterButton;
         private System.Windows.Forms.Button Clear_button;
+        private System.Windows.Forms.ComboBox currentHeaderComboBox;
 
     }
 }
